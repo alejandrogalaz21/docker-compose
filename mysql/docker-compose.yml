@@ -1,0 +1,54 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:5.6
+    container_name: mysql_local
+    hostname: mysql_local_host
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306  
+    environment:
+      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - default  
+  
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_local
+    hostname: phpmyadmin_local_host
+    restart: always
+    ports:
+      - 8092:80  
+    environment:
+      PMA_HOST: mysql
+      UPLOAD_LIMIT: 512M
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_PASSWORD: $DB_PASSWORD
+    networks:
+      - default  
+
+networks:
+  default:
+    external:
+      name: local_network
+
+volumes:
+  mysql_data:
+
+
+
+
+
+
+
+
+
+

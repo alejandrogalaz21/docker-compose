@@ -1,0 +1,46 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_local
+    hostname: redis_local_host
+    restart: unless-stopped
+    environment: 
+    - requirepass=$DB_PASSWORD
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+    networks:
+      - default  
+   
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis_commander_local
+    hostname: redis_commander_local_host
+    restart: always
+    environment:
+      - REDIS_HOSTS=redis
+      - HTTP_PASSWORD=$DB_PASSWORD
+    ports:
+      - 0:8081    
+    networks:
+      - default  
+
+networks:
+  default:
+    external:
+      name: local_network
+
+volumes:
+  redis_data:
+
+
+
+
+
+
+
+
+
