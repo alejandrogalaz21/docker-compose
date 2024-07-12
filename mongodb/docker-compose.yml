@@ -5,8 +5,9 @@ services:
     image: mongo:5.0
     container_name: mongo_db
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${DB_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
+      - MONGO_INITDB_USERNAME=${DB_USER}
+      - MONGO_INITDB_PASSWORD=${DB_PASSWORD}
+      - TZ="America/Mexico_City"
     restart: unless-stopped
     ports:
       - 27017:27017
@@ -22,6 +23,7 @@ services:
       - ME_CONFIG_MONGODB_URL=mongodb://${DB_USER}:${DB_PASSWORD}@mongo:27017/?authSource=admin
       - ME_CONFIG_BASICAUTH_USERNAME=admin
       - ME_CONFIG_BASICAUTH_PASSWORD=admin
+      - TZ="America/Mexico_City"
     links:
       - mongo
     restart: unless-stopped

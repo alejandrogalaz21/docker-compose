@@ -13,6 +13,7 @@ services:
       MYSQL_USER: $DB_USER
       MYSQL_PASSWORD: $DB_PASSWORD
       MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      TZ: "America/Mexico_City"
     volumes:
       - mysql_data:/var/lib/mysql
     networks:
@@ -32,6 +33,7 @@ services:
       UPLOAD_LIMIT: 512M
       MYSQL_ROOT_PASSWORD: $DB_PASSWORD
       MYSQL_PASSWORD: $DB_PASSWORD
+      TZ: "America/Mexico_City"
     networks:
       - default  
 
