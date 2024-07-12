@@ -3,8 +3,7 @@ version: '3.7'
 services:
   redis:
     image: redis:latest
-    container_name: redis_local
-    hostname: redis_local_host
+    container_name: redis
     restart: unless-stopped
     environment: 
     - requirepass=$DB_PASSWORD
@@ -18,8 +17,7 @@ services:
    
   redis-commander:
     image: rediscommander/redis-commander:latest
-    container_name: redis_commander_local
-    hostname: redis_commander_local_host
+    container_name: redis_commander
     restart: always
     environment:
       - REDIS_HOSTS=redis

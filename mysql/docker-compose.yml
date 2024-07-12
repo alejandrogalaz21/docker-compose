@@ -3,8 +3,7 @@ version: '3.7'
 services:
   mysql:
     image: mysql:5.6
-    container_name: mysql_local
-    hostname: mysql_local_host
+    container_name: mysql
     restart: unless-stopped
     command: --default-authentication-plugin=mysql_native_password
     ports:
@@ -18,7 +17,7 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - default  
-  
+
   phpmyadmin:
     depends_on:
       - mysql
